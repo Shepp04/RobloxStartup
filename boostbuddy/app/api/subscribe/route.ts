@@ -8,8 +8,11 @@ export async function POST(req: Request) {
 
     console.log('Incoming email:', email)
 
-    if (!email || !email.includes('@')) {
-      return NextResponse.json({ error: 'Invalid email' }, { status: 400 })
+    // Validate Email
+    const isValidEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+
+    if (!email || !isValidEmail(email)) {
+      return NextResponse.json({ error: 'Invalid email address' }, { status: 400 })
     }
 
     const { error } = await supabase.from('subscribers').insert([{ email }])
@@ -18,7 +21,7 @@ export async function POST(req: Request) {
       if (error.code === '23505') {
         return NextResponse.json({ error: 'Email already subscribed' }, { status: 400 })
       }
-      
+
       console.error('Supabase insert error:', error)
       return NextResponse.json({ error: 'Failed to subscribe' }, { status: 500 })
     }
