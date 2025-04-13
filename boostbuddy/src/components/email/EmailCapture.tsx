@@ -2,6 +2,9 @@
 
 import { useState } from 'react'
 
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+
 export default function EmailCapture() {
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState<'idle' | 'success' | 'error' | 'loading'>('idle')
@@ -31,7 +34,7 @@ export default function EmailCapture() {
   return (
     <form onSubmit={handleSubmit} className="max-w-md mx-auto">
       <div className="flex flex-col sm:flex-row gap-2">
-        <input
+        <Input
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -39,13 +42,12 @@ export default function EmailCapture() {
           required
           className="flex-1 px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
-        <button
+        <Button
           type="submit"
           disabled={status === 'loading'}
-          className="px-6 py-2 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition-colors"
         >
           {status === 'loading' ? 'Submitting...' : 'Join Waitlist'}
-        </button>
+        </Button>
       </div>
 
       {status === 'success' && (

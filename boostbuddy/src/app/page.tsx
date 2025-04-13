@@ -1,4 +1,5 @@
 import EmailCapture from '@/components/email/EmailCapture'
+import GameScanner from '@/components/scan/GameScanner'
 import FeatureCard from '@/components/info/FeatureCard'
 import Step from '@/components/info/Step'
 
@@ -14,6 +15,10 @@ export default function HomePage() {
         </p>
         <EmailCapture />
         <p className="text-sm text-gray-400 mt-4">Join 100+ Roblox devs on the early access waitlist</p>
+      </section>
+
+      <section className="max-w-4xl mx-auto py-20 text-center">
+        <GameScanner />
       </section>
 
       <section className="max-w-4xl mx-auto py-12 grid sm:grid-cols-2 gap-8">
